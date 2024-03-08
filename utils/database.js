@@ -9,9 +9,6 @@ export const connectToDB = async()=>{
     try{
         await mongoose.connect(process.env.MONGODB_URI, {
             dbName:"crypto",
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            // useCreateIndex: true
         });
         isConnected = true;
         console.log('Mongodb is connected');
