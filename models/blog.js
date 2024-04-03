@@ -1,4 +1,6 @@
-import {Schema,model,models} from "mongoose";
+import mongoose from "mongoose";
+const {Schema} = mongoose;
+mongoose.Promise = global.Promise;
 const BlogSchema = new Schema({
     title:{
         type: String,
@@ -41,5 +43,5 @@ const BlogSchema = new Schema({
         ref: "Reposts"
     }]
 })
-const Blog = models.Blog || model("blog",BlogSchema);
+const Blog = mongoose.models.Blog || mongoose.model("Blog",BlogSchema);
 export default Blog;

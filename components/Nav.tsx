@@ -18,14 +18,19 @@ const Nav = () => {
         }
         declareProviders();
     }, []);
-    console.log(session?.user);
-    console.log(providers);
     return (
         <nav className='flex-between w-full mb-16 pt-3'>
-            <Link href="" className='flex gap-2 flex-center'>
+            <Link href="/" className='flex gap-2 flex-center'>
                 <Image src={logoImage} alt='Logo image' width="50" height="50" className='object-contain' />
-                <p className='logo_text'>Crypto News</p>
+                <p className='logo_text'>CryptoEraWatch</p>
             </Link>
+            <Link href="/Articles">
+                <p className='text-xl font-bold'>Articles</p>
+            </Link>
+            <Link href="/Market">
+                <p className='text-xl font-bold'>Market</p>
+            </Link>
+
             {/* Desktop device */}
             <div className='sm:flex hidden'>
                 {

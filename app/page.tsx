@@ -8,7 +8,7 @@ const Home = () => {
                 <span className='orange_gradient text-center mt-5'>Which is the best coins to start investing on ?</span>
             </h1>
             <p className='desc text-center'>
-                Welcome to crypto news, where you shall discover what is trending in the world of Cryptocurrency and never miss any information
+                Welcome to  <span className='orange_gradient font-bold'>CryptoEraWatch</span>  news, where you shall discover what is trending in the world of Cryptocurrency and never miss any information
             </p>
             <Feed />
         </section>
