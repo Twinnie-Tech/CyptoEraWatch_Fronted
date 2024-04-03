@@ -23,7 +23,7 @@ const CryptoCard = ({ blog, handleTagClick }) => {
                     onClick={handleProfileClick}
                 >
                     <Image
-                        src={blog.author.image}
+                        src={blog?.author?.image}
                         alt='user_image'
                         width={40}
                         height={40}
@@ -32,10 +32,10 @@ const CryptoCard = ({ blog, handleTagClick }) => {
 
                     <div className='flex flex-col'>
                         <h3 className='font-satoshi font-semibold text-gray-900'>
-                            {blog.author.username}
+                            {blog?.author?.username}
                         </h3>
                         <p className='font-inter text-sm text-gray-500'>
-                            {blog.author.email}
+                            {blog?.author?.email}
                         </p>
                     </div>
                 </div>
@@ -62,7 +62,7 @@ const CryptoCard = ({ blog, handleTagClick }) => {
                 #{blog.tag}
             </p>
 
-            {session?.user?.id === blog.author._id && pathName === "/profile" && (
+            {session?.user?.id === blog?.author?._id && pathName === "/profile" && (
                 <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
                     <p
                         className='font-inter text-sm green_gradient cursor-pointer'
