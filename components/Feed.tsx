@@ -31,7 +31,6 @@ const Feed = () => {
     const fetchPosts = async () => {
         const resp = await fetch("/api/blog");
         const data = await resp.json();
-        console.log(data);
         setAllPosts(data);
     };
     useEffect(() => {
