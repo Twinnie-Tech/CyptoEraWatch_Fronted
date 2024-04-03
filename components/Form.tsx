@@ -8,6 +8,7 @@ interface formInputs {
     handleSubmit: any,
 }
 
+
 const Form: React.FC<formInputs> = ({ type, post, setPost, submitting, handleSubmit }) => {
     // console.log(type, post, setPost, submitting, handleSubmit)
     return (
