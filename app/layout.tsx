@@ -1,9 +1,8 @@
-'use client'
-// export const metadata = {
-//   title: 'Crypto News',
-//   description: 'Best blogs in world of crypto currency',
-// }
-import "@styles/globals.css";
+export const metadata = {
+  title: 'Crypto News',
+  description: 'Best blogs in world of crypto currency',
+}
+import "../css/output.css";
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
 import { usePathname } from "next/navigation";
@@ -13,8 +12,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const pathname = usePathname();
-  const isDashboard = pathname.includes("/dashboard");
+  // const pathname = usePathname();
+  // const isDashboard = pathname.includes("/dashboard");
   return (
     <html lang="en">
       <body>
@@ -25,7 +24,7 @@ export default function RootLayout({
             </div>
           </div>
           <main className="app">
-            {!isDashboard && <Nav />}
+            <Nav />
             {children}
           </main>
         </Provider>

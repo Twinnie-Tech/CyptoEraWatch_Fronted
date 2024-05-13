@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { GrDashboard } from 'react-icons/gr';
 import { GrArticle } from 'react-icons/gr';
 import { MdCreateNewFolder } from "react-icons/md";
+import { CiSettings } from "react-icons/ci";
 
 const ActiveMenuLink = ({ children, href }: any) => {
     const pathName = usePathname();
@@ -24,7 +25,7 @@ const SideMenu = () => {
     return (
         <nav className='h-[100vh] w-[100%]'>
             <ul className='flex flex-col justify-between h-[100%]'>
-                <div className='h-[25%] justify-center m-auto'>
+                <div className='h-[25%] justify-center align-center m-auto'>
                     <li className='w-full'>
                         <ActiveMenuLink href="/dashboard">
                             <GrDashboard className='text-2xl' />
@@ -38,8 +39,13 @@ const SideMenu = () => {
                         </ActiveMenuLink>
                     </li>
                     <li className="w-full">
-                        <ActiveMenuLink href='/dashboard/createBlog'>
+                        <ActiveMenuLink href='/dashboard/createblog'>
                             <MdCreateNewFolder className='text-2xl' /> <span>Create Articles</span>
+                        </ActiveMenuLink>
+                    </li>
+                    <li className="w-full">
+                        <ActiveMenuLink href='/dashboard/settings'>
+                            <CiSettings className='text-2xl' /><span>Settings</span>
                         </ActiveMenuLink>
                     </li>
                 </div>

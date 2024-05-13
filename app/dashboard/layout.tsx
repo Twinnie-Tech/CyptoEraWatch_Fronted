@@ -4,7 +4,7 @@ const DashboardLayout = ({ children }: {
     children: React.ReactNode
 }) => {
     return (
-        <div className='flex w-full bg-red-400'>
+        <div className='flex w-full'>
             <aside className='flex-[1]'>
                 <SideMenu />
             </aside>
