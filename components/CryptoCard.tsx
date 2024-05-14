@@ -6,12 +6,12 @@ import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
 
-const CryptoCard = ({ blog, handleTagClick }) => {
+const CryptoCard = ({ blog, handleTagClick }: any) => {
     const { data: session } = useSession();
     const pathName = usePathname();
     const router = useRouter();
     const handleProfileClick = () => {
-        if (blog.author._id === session?.user?.id) return router.push("/profile");
+        if (blog.author?._id === session?.user?.id) return router.push("/dashboard/profile");
 
         router.push(`/profile/${blog.author._id}?name=${blog.author.userName}`);
     };

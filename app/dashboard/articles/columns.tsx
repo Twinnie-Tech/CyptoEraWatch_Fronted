@@ -30,7 +30,7 @@ export const columns: ColumnDef<ArticleDetails>[] = [
         },
     },
     {
-        accessorKey: "shortDescription",
+        accessorKey: "tag",
         header: ({ column }) => {
             return (
                 <Button
@@ -38,29 +38,29 @@ export const columns: ColumnDef<ArticleDetails>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                     className=""
                 >
-                    <span>Short Description</span>
+                    <span>Tag</span>
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
         },
     },
+    // {
+    //     accessorKey: "status",
+    //     header: ({ column }) => {
+    //         return (
+    //             <Button
+    //                 variant="ghost"
+    //                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+    //                 className=""
+    //             >
+    //                 <span>Status</span>
+    //                 <ArrowUpDown className="ml-2 h-4 w-4" />
+    //             </Button>
+    //         )
+    //     },
+    // },
     {
-        accessorKey: "status",
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                    className=""
-                >
-                    <span>Status</span>
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            )
-        },
-    },
-    {
-        accessorKey: "createdAt",
+        accessorKey: "date",
         header: ({ column }) => {
             return (
                 <Button

@@ -7,7 +7,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
   theme: {
     container: {
@@ -19,6 +19,7 @@ const config = {
     },
     extend: {
       colors: {
+        'primary-orange': '#FF5722',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -72,6 +73,10 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      fontFamily: {
+        satoshi: ['Satoshi', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

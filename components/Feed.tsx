@@ -48,6 +48,7 @@ const Feed = () => {
                     className='search_input peer'
                 />
             </form>
+
             <CryptoCardList
                 data={allPosts}
                 handleTagClick={() => { }}

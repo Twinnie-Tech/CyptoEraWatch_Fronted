@@ -12,12 +12,13 @@ const Nav = () => {
     useEffect(() => {
         const declareProviders = async () => {
             const resp: any = await getProviders();
+            console.log(resp);
             setProviders(resp);
         }
         declareProviders();
     }, []);
     return (
-        <nav className='flex justify-between align-center space-x-2 mb-16 pt-3'>
+        <nav className='flex-between w-full mb-16 pt-3'>
             <Link href="/" className='flex gap-2 flex-center'>
                 <Image src={logoImage} alt='Logo image' width="50" height="50" className='object-contain' />
                 <p className='logo_text'>CryptoEraWatch</p>
@@ -33,8 +34,8 @@ const Nav = () => {
             <div className='sm:flex hidden'>
                 {
                     session?.user ? (
-                        <div className='flex'>
-                            <Link href="/createblog"
+                        <div className='flex gap-3 md:gap-5'>
+                            <Link href="/dashboard/createblog"
                                 className='black_btn'
                             >
                                 Create Blog
@@ -42,7 +43,7 @@ const Nav = () => {
                             <button
                                 type='button'
                                 onClick={signOut}
-                                className=''>
+                                className='outline_btn'>
                                 Sign Out
                             </button>
                             <Link href="/dashboard/profile">
