@@ -7,7 +7,7 @@ const AlertDialogDemo = ({ typeButton, name }: any) => (
     <AlertDialog.Root>
         <AlertDialog.Trigger asChild>
             <button className="text-violet11 hover:bg-mauve3 shadow-blackA4 inline-flex h-[35px] items-center justify-center rounded-[4px] bg-lime-400 px-[15px] font-medium leading-none shadow-[0_2px_10px] outline-none focus:shadow-[0_0_0_2px] focus:shadow-black">
-                {typeButton == "AddAction" ? "Add Role" : typeButton == "EditAction" ? <MdOutlineEdit className="text-green-600 text-2xl" /> : " "}
+                {typeButton == "AddAction" ? "Add Article" : typeButton == "EditAction" ? <MdOutlineEdit className="text-green-600 text-2xl" /> : " "}
             </button>
         </AlertDialog.Trigger>
         <AlertDialog.Portal>

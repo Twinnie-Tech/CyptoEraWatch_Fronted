@@ -13,7 +13,7 @@ const CreateBlog = () => {
         title: "",
         content: "",
         tag: "",
-        image: ""
+        image: "",
     })
     const createPost = async (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault();

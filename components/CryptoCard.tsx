@@ -10,6 +10,7 @@ const CryptoCard = ({ blog, handleTagClick }: any) => {
     const { data: session } = useSession();
     const pathName = usePathname();
     const router = useRouter();
+    console.log(blog);
     const handleProfileClick = () => {
         if (blog.author?._id === session?.user?.id) return router.push("/dashboard/profile");
 

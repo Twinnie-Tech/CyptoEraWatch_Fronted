@@ -1,4 +1,4 @@
-import Blog from "@models/blog";
+import Blog from "@app/api/models/blog";
 import {connectToDB} from "@utils/database";
 export const GET = async(req)=>{
 try{

@@ -44,21 +44,24 @@ export const columns: ColumnDef<ArticleDetails>[] = [
             )
         },
     },
-    // {
-    //     accessorKey: "status",
-    //     header: ({ column }) => {
-    //         return (
-    //             <Button
-    //                 variant="ghost"
-    //                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-    //                 className=""
-    //             >
-    //                 <span>Status</span>
-    //                 <ArrowUpDown className="ml-2 h-4 w-4" />
-    //             </Button>
-    //         )
-    //     },
-    // },
+    {
+        accessorKey: "status",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    className=""
+                >
+                    <span>Status</span>
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: () => {
+            return <p>Pending</p>
+        }
+    },
     {
         accessorKey: "date",
         header: ({ column }) => {
@@ -74,26 +77,22 @@ export const columns: ColumnDef<ArticleDetails>[] = [
             )
         },
     },
-    // {
-    //     id: "actions",
-    //     header: ({ column }) => {
-    //         return (
-    //             <AlertDialogDemo typeButton="AddAction" name="Add Role" />
-    //         )
-    //     },
-    //     cell: () => {
-    //         return (
-    //             <div>
-    //                 <Button className="">
-    //                     <AlertDialogDemo typeButton="EditAction" name="Edit Role" />
-    //                 </Button>
-    //                 <Button>
-    //                     <MdDelete className="text-red-600 text-2xl" />
-    //                 </Button>
-    //             </div>
-    //         )
+    {
+        id: "actions",
+        header: "Action",
+        cell: () => {
+            return (
+                <div>
+                    <Button className="">
+                        <AlertDialogDemo typeButton="EditAction" name="Edit Role" />
+                    </Button>
+                    <Button>
+                        <MdDelete className="text-red-600 text-2xl" />
+                    </Button>
+                </div>
+            )
 
-    //     },
+        },
 
-    // }
+    }
 ]

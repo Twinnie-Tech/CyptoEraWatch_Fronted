@@ -14,6 +14,11 @@ const BlogSchema = new Schema({
         type: String,
         required:[true,'tag is required']
     },
+    status:{
+        type: String,
+        enum:["active","pending","complete"],
+        default:"pending"
+    },
     image:[{
         type: String,
     }],

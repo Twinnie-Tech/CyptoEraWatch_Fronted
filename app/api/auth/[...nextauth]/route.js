@@ -1,11 +1,7 @@
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import {connectToDB} from "@utils/database";
-import User from "@models/user";
-console.log({
-    GOOGLE_ID: process.env.GOOGLE_ID,
-    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET
-})
+import User from "../../models/user";
 const handler = NextAuth({
     providers: [
         GoogleProvider({
@@ -35,7 +31,8 @@ const handler = NextAuth({
                 await User.create({
                     email:profile.email,
                     userName:profile.name.replace(" ", "").toLowerCase(),
-                    image:profile.picture
+                    image:profile.picture,
+                    role: profile.role
                 });
             }
             return true;
