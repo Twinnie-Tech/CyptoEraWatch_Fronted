@@ -1,6 +1,5 @@
 'use client';
 import React from 'react'
-import { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
@@ -8,23 +7,22 @@ import { usePathname, useRouter } from "next/navigation";
 
 const CryptoCard = ({ blog, handleTagClick }: any) => {
     const { data: session } = useSession();
-    const pathName = usePathname();
     const router = useRouter();
-    console.log(blog);
     const handleProfileClick = () => {
-        if (blog.author?._id === session?.user?.id) return router.push("/dashboard/profile");
+        if (blog.author?._id === session?.user?.id) return router.push("/dashboard");
 
-        router.push(`/profile/${blog.author._id}?name=${blog.author.userName}`);
+        router.push(`/profile/${blog.author?._id}?name=${blog.author?.userName}`);
     };
     return (
         <div className='prompt_card'>
             <div className='flex justify-between items-start gap-5'>
-                <div
+                <button
                     className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
                     onClick={handleProfileClick}
+                    onKeyDown={(e) => e.key === 'Enter' && handleProfileClick()}
                 >
                     <Image
-                        src={blog?.author?.image}
+                        src={blog.author?.image}
                         alt='user_image'
                         width={40}
                         height={40}
@@ -33,52 +31,36 @@ const CryptoCard = ({ blog, handleTagClick }: any) => {
 
                     <div className='flex flex-col'>
                         <h3 className='font-satoshi font-semibold text-gray-900'>
-                            {blog?.author?.username}
+                            {blog.author?.username}
                         </h3>
                         <p className='font-inter text-sm text-gray-500'>
-                            {blog?.author?.email}
+                            {blog.author?.email}
                         </p>
                     </div>
-                </div>
-
-                {/* <div className='copy_btn' onClick={handleCopy}>
-                    <Image
-                        src={
-                            copied === post.prompt
-                                ? "/assets/icons/tick.svg"
-                                : "/assets/icons/copy.svg"
-                        }
-                        alt={copied === post.prompt ? "tick_icon" : "copy_icon"}
-                        width={12}
-                        height={12}
-                    />
-                </div> */}
+                </button>
             </div>
 
-            <p className='my-4 font-satoshi text-sm text-gray-700'>{blog.content}</p>
-            <p
+            <p className='my-4 font-satoshi text-sm text-gray-700'>{blog.title}</p>
+            <div className='flex justify-between items-center gap-2'>
+            <button
                 className='font-inter text-sm blue_gradient cursor-pointer'
                 onClick={() => handleTagClick && handleTagClick(blog.tag)}
+                onKeyDown={(e) => e.key === 'Enter' && handleTagClick && handleTagClick(blog.tag)}
             >
                 #{blog.tag}
-            </p>
-
-            {session?.user?.id === blog?.author?._id && pathName === "/profile" && (
-                <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
-                    <p
-                        className='font-inter text-sm green_gradient cursor-pointer'
-                    // onClick={handleEdit}
+            </button>
+            {session?.user?.id === blog.author?._id  && (
+                <div className='flex justify-center items-center gap-2'>
+                    <button className='font-inter text-sm green_gradient cursor-pointer'
+                    onClick={() => router.push(`/dashboard/articles`)}
+                    onKeyDown={(e) => e.key === 'Enter' && router.push(`/dashboard/articles`)}
                     >
                         Edit
-                    </p>
-                    <p
-                        className='font-inter text-sm orange_gradient cursor-pointer'
-                    // onClick={handleDelete}
-                    >
-                        Delete
-                    </p>
+                    </button>
                 </div>
             )}
+            </div>
+
         </div>
     )
 }

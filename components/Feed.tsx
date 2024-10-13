@@ -1,5 +1,4 @@
 "use client"
-import React, { ChangeEvent } from 'react'
 import { useState, useEffect } from "react";
 import CryptoCard from './CryptoCard';
 
@@ -9,7 +8,6 @@ interface CryptoCardValues {
 }
 
 const CryptoCardList: React.FC<CryptoCardValues> = ({ data, handleTagClick }) => {
-    console.log(data);
     return (
         <div className='mt-16 prompt_layout'>
             {data.map((item: any, i: any) => {
@@ -22,8 +20,6 @@ const CryptoCardList: React.FC<CryptoCardValues> = ({ data, handleTagClick }) =>
 }
 const Feed = () => {
     const [searchText, setSearchText] = useState('');
-    const [searchTimeout, setSearchTimeout] = useState(null);
-    const [searchedResults, setSearchedResults] = useState([]);
     const [allPosts, setAllPosts] = useState([]);
     const handleSearchChange = (e: any) => {
         setSearchText(e.target.value);

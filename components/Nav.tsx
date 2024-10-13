@@ -12,7 +12,6 @@ const Nav = () => {
     useEffect(() => {
         const declareProviders = async () => {
             const resp: any = await getProviders();
-            console.log(resp);
             setProviders(resp);
         }
         declareProviders();
@@ -23,10 +22,10 @@ const Nav = () => {
                 <Image src={logoImage} alt='Logo image' width="50" height="50" className='object-contain' />
                 <p className='logo_text'>CryptoEraWatch</p>
             </Link>
-            <Link href="/Articles">
+            <Link href="/articles">
                 <p className='text-xl font-bold'>Articles</p>
             </Link>
-            <Link href="/Market">
+            <Link href="/market">
                 <p className='text-xl font-bold'>Market</p>
             </Link>
 
@@ -46,7 +45,7 @@ const Nav = () => {
                                 className='outline_btn'>
                                 Sign Out
                             </button>
-                            <Link href="/dashboard/profile">
+                            <Link href="/dashboard">
                                 <Image src={session?.user.image} alt='userProfile' width={30} height={30} className='rounded-full' />
                             </Link>
                         </div>

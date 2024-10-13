@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
 import Form from '@components/Form';
+import {toast} from "react-toastify";
 const CreateBlog = () => {
     const router = useRouter();
     const { data: session } = useSession();
-    console.log(session)
     const [submitting, setSubmitting] = useState(false);
     const [post, setPost] = useState({
         title: "",
@@ -30,8 +30,28 @@ const CreateBlog = () => {
                 })
             })
             if (resp.ok) {
-                alert("Blog created successfully being redirected to home page");
-                router.push("/");
+                toast.success("Blog created successfully!",{
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                router.push("/dashboard");
+            }else{
+                toast.error("Something went wrong!",{
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             }
         } catch (e) {
             console.log(e);

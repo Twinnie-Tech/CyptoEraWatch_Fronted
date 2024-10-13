@@ -5,14 +5,8 @@ import { ArrowUpDown } from "lucide-react"
 import { MdDelete } from "react-icons/md";
 import { Button } from "@components/ui/button";
 import AlertDialogDemo from "@components/AlertDialogDemo";
-
-// export type Article = {
-//     id: string
-//     title: string
-//     shortDescription: string
-//     status: "pending" | "processing" | "accepted" | "rejected"
-//     createdAt: string
-// }
+import ViewBlogContent from "@components/ViewBlogContent";
+ 
 export const columns: ColumnDef<ArticleDetails>[] = [
     {
         accessorKey: "title",
@@ -63,7 +57,7 @@ export const columns: ColumnDef<ArticleDetails>[] = [
         }
     },
     {
-        accessorKey: "date",
+        accessorKey: "createdAt",
         header: ({ column }) => {
             return (
                 <Button
@@ -80,19 +74,21 @@ export const columns: ColumnDef<ArticleDetails>[] = [
     {
         id: "actions",
         header: "Action",
-        cell: () => {
+        cell: ({row}) => {
+            const blog = row.original;
             return (
                 <div>
                     <Button className="">
-                        <AlertDialogDemo typeButton="EditAction" name="Edit Role" />
+                        <AlertDialogDemo typeButton="EditAction" name="Edit Blog" blog={blog} />
                     </Button>
                     <Button>
                         <MdDelete className="text-red-600 text-2xl" />
                     </Button>
+                    <Button>
+                      <ViewBlogContent content={blog.content} />
+                    </Button>
                 </div>
             )
-
         },
-
     }
 ]

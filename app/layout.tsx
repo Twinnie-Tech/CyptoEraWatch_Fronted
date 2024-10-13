@@ -5,18 +5,18 @@ export const metadata = {
 import "../css/output.css";
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
-import { usePathname } from "next/navigation";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  // const pathname = usePathname();
-  // const isDashboard = pathname.includes("/dashboard");
   return (
     <html lang="en">
       <body>
+        <ToastContainer />
         <Provider session={null}>
           <div className="main">
             <div className="gradient">

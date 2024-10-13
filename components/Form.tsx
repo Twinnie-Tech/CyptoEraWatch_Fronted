@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-interface formInputs {
+interface FormInputs {
     type: string,
     post: any,
     setPost: any,
@@ -9,8 +9,7 @@ interface formInputs {
 }
 
 
-const Form: React.FC<formInputs> = ({ type, post, setPost, submitting, handleSubmit }) => {
-    // console.log(type, post, setPost, submitting, handleSubmit)
+const Form: React.FC<FormInputs> = ({ type, post, setPost, submitting, handleSubmit }) => {
     return (
         <section className='w-full max-w-full flex-center flex-col'>
             <h1 className='head_text text-left'>
@@ -77,7 +76,7 @@ const Form: React.FC<formInputs> = ({ type, post, setPost, submitting, handleSub
                     />
                 </label>
                 <div className='flex-end mx-3 mb-5 gap-4'>
-                    <Link href='/' className='text-gray-500 text-sm'>
+                    <Link href='/dashboard/articles' className='text-gray-500 text-sm'>
                         Cancel
                     </Link>
                     <button

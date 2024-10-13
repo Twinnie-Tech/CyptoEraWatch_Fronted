@@ -63,9 +63,9 @@ export function DataTable<TData, TValue>({
             <div className="rounded-md border">
                 <Table>
                     <TableHeader>
-                        {table?.getHeaderGroups().map((headerGroup) => (
+                        {table?.getHeaderGroups()?.map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
-                                {headerGroup.headers.map((header) => {
+                                {headerGroup?.headers?.map((header) => {
                                     return (
                                         <TableHead key={header.id} className="bg-blue-300 text-white py-2">
                                             {header.isPlaceholder
@@ -81,7 +81,7 @@ export function DataTable<TData, TValue>({
                         ))}
                     </TableHeader>
                     <TableBody>
-                        {table.getRowModel().rows?.length ? (
+                        {table?.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row) => (
                                 <TableRow
                                     key={row.id}

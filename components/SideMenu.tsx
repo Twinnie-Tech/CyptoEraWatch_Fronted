@@ -6,6 +6,7 @@ import { GrDashboard } from 'react-icons/gr';
 import { GrArticle } from 'react-icons/gr';
 import { MdCreateNewFolder } from "react-icons/md";
 import { CiSettings } from "react-icons/ci";
+import { MdOutlineEventSeat } from "react-icons/md";
 
 const ActiveMenuLink = ({ children, href }: any) => {
     const pathName = usePathname();
@@ -46,6 +47,11 @@ const SideMenu = () => {
                     <li className="w-full">
                         <ActiveMenuLink href='/dashboard/settings'>
                             <CiSettings className='text-2xl' /><span>Settings</span>
+                        </ActiveMenuLink>
+                    </li>
+                    <li className='w-full'>
+                        <ActiveMenuLink href="/dashboard/events">
+                            <MdOutlineEventSeat className='text-2xl' /><span>Events</span>
                         </ActiveMenuLink>
                     </li>
                 </div>
