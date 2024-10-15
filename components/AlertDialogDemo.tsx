@@ -13,7 +13,7 @@ interface AlertDialogDemoProps {
 
 
 
-const AlertDialogDemo = ({ typeButton, name,blog }: AlertDialogDemoProps) => (
+const AlertDialogDemo = ({ typeButton, name, blog }: AlertDialogDemoProps) => (
     <AlertDialog.Root>
         <AlertDialog.Trigger asChild>
             <button className="text-violet11 hover:bg-mauve3  inline-flex h-[35px] items-center justify-center rounded-[4px] bg-primary-orange px-[15px] font-medium leading-none outline-none">

@@ -11,6 +11,7 @@ export const POST = async (request) => {
       status: "pending",
       image,
       author: userId,
+      isDeleted: false,
     });
     await newBlog.save();
     return new Response(JSON.stringify(newBlog), { status: 201 });

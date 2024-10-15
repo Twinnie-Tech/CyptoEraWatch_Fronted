@@ -46,7 +46,11 @@ const BlogSchema = new Schema({
     reposts:[{
         type: Schema.Types.ObjectId,
         ref: "Reposts"
-    }]
+    }],
+    isDeleted:{
+        type:Boolean,
+        default:false
+    }
 })
 const Blog = mongoose.models.Blog || mongoose.model("Blog",BlogSchema);
 export default Blog;

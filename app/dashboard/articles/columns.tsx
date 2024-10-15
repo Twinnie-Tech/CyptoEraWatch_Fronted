@@ -2,10 +2,11 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { ArticleDetails } from "@app/Dummy/MOCK_DATA"
 import { ArrowUpDown } from "lucide-react"
-import { MdDelete } from "react-icons/md";
 import { Button } from "@components/ui/button";
 import AlertDialogDemo from "@components/AlertDialogDemo";
 import ViewBlogContent from "@components/ViewBlogContent";
+import DeleteDialogDemo from "@components/DeleteDialogDemo";
+
  
 export const columns: ColumnDef<ArticleDetails>[] = [
     {
@@ -81,8 +82,8 @@ export const columns: ColumnDef<ArticleDetails>[] = [
                     <Button className="">
                         <AlertDialogDemo typeButton="EditAction" name="Edit Blog" blog={blog} />
                     </Button>
-                    <Button>
-                        <MdDelete className="text-red-600 text-2xl" />
+                    <Button className="">
+                    <DeleteDialogDemo  blogId={blog?.id} />
                     </Button>
                     <Button>
                       <ViewBlogContent content={blog.content} />
