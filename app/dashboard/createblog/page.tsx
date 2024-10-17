@@ -4,9 +4,10 @@ import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
 import Form from '@components/Form';
 import {toast} from "react-toastify";
+import { CustomSession } from '../articles/page';
 const CreateBlog = () => {
     const router = useRouter();
-    const { data: session } = useSession();
+    const { data: session } = useSession() as { data: CustomSession | null };
     const [submitting, setSubmitting] = useState(false);
     const [post, setPost] = useState({
         title: "",

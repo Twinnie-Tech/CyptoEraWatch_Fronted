@@ -20,7 +20,7 @@ interface UserType{
     image:string
     name:string
 }
-interface CustomSession extends Session {
+export interface CustomSession extends Session {
     user:UserType
 }
 
