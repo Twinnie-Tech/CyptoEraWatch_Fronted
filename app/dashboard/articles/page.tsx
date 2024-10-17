@@ -4,6 +4,7 @@ import { DataTable } from './data-table'
 import { columns } from "./columns"
 import { useSession } from 'next-auth/react'
 import {Session} from "next-auth";
+import { ColumnDef } from '@tanstack/react-table'
 
 interface BlogType{
     id: number
@@ -69,7 +70,7 @@ const Articles = () => {
                 <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
             </div>
         ) : (
-            <DataTable columns={columns} data={articles} />
+            <DataTable columns={columns as ColumnDef<BlogType, unknown>[]} data={articles} />
         )}
         </div>
     )
