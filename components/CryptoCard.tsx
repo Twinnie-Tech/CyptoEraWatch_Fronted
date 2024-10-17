@@ -2,11 +2,12 @@
 import React from 'react'
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { CustomSession } from '@app/dashboard/articles/page';
 
 
 const CryptoCard = ({ blog, handleTagClick }: any) => {
-    const { data: session } = useSession();
+    const { data: session } = useSession() as { data: CustomSession | null };
     const router = useRouter();
     const handleProfileClick = () => {
         if (blog.author?._id === session?.user?.id) return router.push("/dashboard");

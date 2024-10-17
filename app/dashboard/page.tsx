@@ -1,9 +1,10 @@
 'use client'
 import { useEffect,useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { CustomSession } from './articles/page';
 
 const Dashboard = () => {
-    const {data:session} = useSession();
+    const { data: session } = useSession() as { data: CustomSession | null };
     const  [totalArticles, setTotalArticles] = useState<number>(0);
     const [userName, setUserName] = useState<string>('');
     useEffect(() => {
