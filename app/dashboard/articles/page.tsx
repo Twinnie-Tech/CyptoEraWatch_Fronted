@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { DataTable } from './data-table'
 import { columns } from "./columns"
 import { useSession } from 'next-auth/react'
+import {Session} from "next-auth";
 
 interface BlogType{
     id: number
@@ -12,10 +13,21 @@ interface BlogType{
     tag:string
     createdAt: string
 }
+interface UserType{
+    email:string
+    id:string
+    image:string
+    name:string
+}
+interface CustomSession extends Session {
+    user:UserType
+}
+
 const Articles = () => {
-    const { data: session } = useSession();
+    const { data: session } = useSession() as {data:CustomSession | null};
     const [articles, setArticles] = useState<BlogType[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    console.log(session,"all sessions");
 
     const formattedDate = (date: Date) => date.toLocaleDateString('en-US', {
         year: 'numeric',
@@ -31,7 +43,7 @@ const Articles = () => {
         setIsLoading(true);
         const resp = await fetch("/api/blog");
         const data = await resp.json();
-        const blog = data.filter((article: any) => article.author?._id == session?.user?.id);
+        const blog = data.filter((article: any) => article.author?._id === session?.user?.id);
         localStorage.setItem("totalBlogs", JSON.stringify(blog.length));
         const blogStructure = blog.map((article: any) => ({
             id: article._id,
