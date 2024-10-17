@@ -12,7 +12,7 @@ interface UserType {
 }
 
 interface BlogType{
-    id: string
+    _id: string
     title: string
     author: {
         _id: string
