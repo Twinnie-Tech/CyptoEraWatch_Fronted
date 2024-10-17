@@ -5,7 +5,7 @@ import { MdDelete } from 'react-icons/md';
 import {toast} from "react-toastify";
 
 interface DeleteDialogDemoProps{
-    blogId:string
+    blogId:number
 }
 
 const DeleteDialogDemo = ({blogId}:DeleteDialogDemoProps) => {
