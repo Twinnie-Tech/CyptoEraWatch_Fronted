@@ -19,7 +19,7 @@ const Nav = () => {
     return (
         <nav className='flex-between w-full mb-16 pt-3'>
             <Link href="/" className='flex gap-2 flex-center'>
-                <Image src={logoImage} alt='Logo image' width="50" height="50" className='object-contain' />
+                <Image src={logoImage} alt='Logo image' width={50} height={50} className='object-contain' />
                 <p className='logo_text'>CryptoEraWatch</p>
             </Link>
             <Link href="/articles">
@@ -41,12 +41,12 @@ const Nav = () => {
                             </Link>
                             <button
                                 type='button'
-                                onClick={signOut}
+                                onClick={() => signOut()}
                                 className='outline_btn'>
                                 Sign Out
                             </button>
                             <Link href="/dashboard">
-                                <Image src={session?.user.image} alt='userProfile' width={30} height={30} className='rounded-full' />
+                                <Image src={session?.user.image || ''} alt='userProfile' width={30} height={30} className='rounded-full' />
                             </Link>
                         </div>
                     ) : (
@@ -71,7 +71,7 @@ const Nav = () => {
                     session?.user ? (
                         <div className='flex'>
                             <Image
-                                src={session?.user.image} alt='userProfile' width={30} height={30}
+                                src={session?.user.image || ''} alt='userProfile' width={30} height={30}
                                 className='rounded-full'
                                 onClick={() => setToggleDropDown((prev) => !prev)}
                             />
@@ -92,10 +92,9 @@ const Nav = () => {
                                     <button
                                         type='button'
                                         onClick={() => {
-                                            setToggleDropDown(false)
+                                            setToggleDropDown(false);
                                             signOut();
-                                        }
-                                        }
+                                        }}
                                         className='black_btn'
                                     >
                                         Sign Out
@@ -124,5 +123,4 @@ const Nav = () => {
         </nav>
     )
 }
-
-export default Nav
+export default Nav;
