@@ -11,7 +11,9 @@ export const connectToDB = async () => {
       dbName: "crypto",
     });
     isConnected = true;
-    console.log("Mongodb is connected");
+    if (isConnected) {
+      console.log("Mongodb is connected");
+    }
   } catch (error) {
     console.log(error);
   }

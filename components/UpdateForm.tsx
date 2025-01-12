@@ -1,9 +1,11 @@
 import { ArticleDetails } from '@app/Dummy/MOCK_DATA';
 import {useState} from 'react';
 import {toast} from "react-toastify";
-import Link from 'next/link';
+// import Link from 'next/link';
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { useRouter } from 'next/navigation';
+// import {Select,SelectTrigger,SelectValue,SelectContent,SelectItem} from "@radix-ui/react-select";
+import { useUser } from '@app/context/UserContext';
 
 interface UpdateFormProps{
     blog: ArticleDetails;
@@ -11,6 +13,8 @@ interface UpdateFormProps{
 }
 
 const UpdateForm = ({blog,type}:UpdateFormProps) => {
+    const {user} = useUser();
+    console.log(user?.role,"user value");
     const [submitting, setSubmitting] = useState(false);
     const router = useRouter(); 
 
@@ -19,6 +23,7 @@ const UpdateForm = ({blog,type}:UpdateFormProps) => {
         content: blog.content,
         tag: blog.tag,
         image: blog.image,
+        status: blog.status,
     });
 
     const updatePost = async(e:React.FormEvent<HTMLFormElement>) => {
@@ -33,6 +38,7 @@ const UpdateForm = ({blog,type}:UpdateFormProps) => {
                     content: post.content,
                     tag: post.tag,
                     image: post.image,
+                    status: post.status
                 })
             });
 
@@ -119,7 +125,25 @@ const UpdateForm = ({blog,type}:UpdateFormProps) => {
                         className="form_input"
                     />
                 </label>
-                <div className='flex-end mx-3 gap-4'>
+                <label>
+                <span className='font-satoshi font-semibold text-base text-gray-700 '>Status</span>
+                {user?.role == "admin" ? (
+        <select 
+            value={post.status}
+            onChange={(e) => setPost({...post, status: e.target.value})}
+            className="w-full"
+        >
+            <option value="" disabled>Select status</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+        </select>
+    ): (
+        <p>{post?.status}</p>
+    )
+}
+                </label>
+                <div className='flex-end mx-3 gap-4 mt-4'>
                 <AlertDialog.Action asChild>
                         <button className="px-5 py-1.5  bg-red-600 hover:bg-red-400  rounded-full text-white">
                             Cancel

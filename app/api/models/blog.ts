@@ -16,7 +16,7 @@ const BlogSchema = new Schema({
     },
     status:{
         type: String,
-        enum:["active","pending","complete"],
+        enum:["approved","pending","rejected"],
         default:"pending"
     },
     image:[{
@@ -32,8 +32,19 @@ const BlogSchema = new Schema({
         required:[true,'author is required']
     },
     comments:[{
-        type: Schema.Types.ObjectId,
-        ref: "Comment"
+        content: {
+            type: String,
+            required: true
+        },
+        author: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now
+        }
     }],
     likes:[{
         type: Schema.Types.ObjectId,

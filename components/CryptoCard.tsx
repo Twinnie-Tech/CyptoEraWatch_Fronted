@@ -1,12 +1,15 @@
 'use client';
-import React from 'react'
+import React,{useState} from 'react'
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { CustomSession } from '@app/dashboard/articles/page';
+import { PostModal } from './Feed';
+import {toast} from "react-toastify";
 
 
 const CryptoCard = ({ blog, handleTagClick }: any) => {
+    const [showModal,setShowModal] = useState(false);
     const { data: session } = useSession() as { data: CustomSession | null };
     const router = useRouter();
     const handleProfileClick = () => {
@@ -14,8 +17,15 @@ const CryptoCard = ({ blog, handleTagClick }: any) => {
 
         router.push(`/profile/${blog.author?._id}?name=${blog.author?.userName}`);
     };
+
+      if(session?.user?.id == undefined){
+       toast.error("You must be logged in to comment.");
+      }
+
     return (
-        <div className='prompt_card'>
+        <>
+        
+        <div className='prompt_card bg-blue-300'>
             <div className='flex justify-between items-start gap-5'>
                 <button
                     className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
@@ -50,6 +60,17 @@ const CryptoCard = ({ blog, handleTagClick }: any) => {
             >
                 #{blog.tag}
             </button>
+            <button
+            className='font-inter text-sm orange_gradient cursor-pointer'  
+            onClick={() => {
+                if (!session?.user?.id) {
+                    toast.error('Please login to read full article');
+                    return;
+                }
+                setShowModal(true);
+            }}>
+                Read More
+            </button>
             {session?.user?.id === blog.author?._id  && (
                 <div className='flex justify-center items-center gap-2'>
                     <button className='font-inter text-sm green_gradient cursor-pointer'
@@ -63,6 +84,14 @@ const CryptoCard = ({ blog, handleTagClick }: any) => {
             </div>
 
         </div>
+        {
+    showModal && (
+        <div className='z-50'>
+            <PostModal post={blog} onClose={() => setShowModal(false)} />
+        </div>
+    )
+}
+        </>
     )
 }
 

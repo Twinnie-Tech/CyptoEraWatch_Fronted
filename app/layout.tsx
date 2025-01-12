@@ -7,6 +7,7 @@ import Nav from "@components/Nav";
 import Provider from "@components/Provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { UserProvider } from "./context/UserContext";
 
 export default function RootLayout({
   children,
@@ -25,7 +26,9 @@ export default function RootLayout({
           </div>
           <main className="app">
             <Nav />
+            <UserProvider>
             {children}
+            </UserProvider>
           </main>
         </Provider>
       </body>

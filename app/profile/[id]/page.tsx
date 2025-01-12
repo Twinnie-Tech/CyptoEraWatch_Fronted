@@ -2,7 +2,7 @@
 import {useEffect,useState} from 'react';
 import Image from 'next/image';
 
-interface UserType {
+export interface UserType {
     userName: string
     email: string
     image: string
