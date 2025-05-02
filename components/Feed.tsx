@@ -38,7 +38,6 @@ try{
     });
     if(response.ok){
         const updatedPost = await response.json();
-        console.log("Comment posted successfully",updatedPost);
         setNewComment('');
         // Remove the reference to allPosts as it's not defined in the current scope
         // If you need to update the post, you can do it directly

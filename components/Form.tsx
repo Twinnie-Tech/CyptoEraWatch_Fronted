@@ -1,5 +1,7 @@
-import React , {ChangeEvent} from 'react';
+import React , {ChangeEvent ,useState} from 'react';
 import Link from 'next/link';
+const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_NAME;
+const cloudPreset = process.env.NEXT_PUBLIC_CLOUD_PRESET;
 interface FormInputs {
     type: string,
     post: any,
@@ -8,54 +10,42 @@ interface FormInputs {
     handleSubmit: any,
 }
 
-import {
-    getStorage,
-    ref,
-    uploadBytesResumable,
-    getDownloadURL,
-  } from "firebase/storage";
-
   import { Button } from './ui/button';
-
-  import { useState } from 'react';
 const Form: React.FC<FormInputs> = ({ type, post, setPost, submitting, handleSubmit }) => {
   const [file, setFile] = useState<File | null | any>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [preview,setPreview] = useState<string | null>(null);
       //Upload image
-  const uploadImage = async (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    const storage = getStorage();
-    const fileName = file?.name ? file.name + new Date().getTime() : "";
-    const storageRef = ref(storage, `blogImage/${fileName}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-    uploadTask.on(
-      "state_changed",
-      (snapShot) => {
-        const progress =
-          (snapShot.bytesTransferred / snapShot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
-        switch (snapShot.state) {
-          case "paused":
-            console.log("Upload is paused");
-            break;
-          case "running":
-            console.log("Upload is running");
-            break;
-        }
-      },
-      (error) => {
-        throw new Error(error.message);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          // setUserProfile(downloadURL);
+      const uploadImage = async (e: React.SyntheticEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        
+        try {
+          const formData = new FormData();
+          if (file) {
+            formData.append('file', file);
+          }
+          if (cloudPreset) {
+            formData.append('upload_preset', cloudPreset);
+          }
+          const response = await fetch(
+            `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+            {
+              method: 'POST',
+              body: formData,
+            }
+          );
+      
+          const data = await response.json();
+          
+          setPost({ ...post, image: data.secure_url });
           setLoading(false);
-          // changeImage(downloadURL);
-        });
-      }
-    );
-  };
+          
+        } catch (error) {
+          setLoading(false);
+          throw new Error("Error uploading image");
+        }
+      };      
 
   const handleResetImage = (e:React.SyntheticEvent)=>{
     e.preventDefault();
@@ -228,7 +218,7 @@ const Form: React.FC<FormInputs> = ({ type, post, setPost, submitting, handleSub
                       Cancel
                     </button>
                     <Button
-                      className="bg-blue-600"
+                      className="bg-blue-600 hover:bg-white  hover:text-black hover:border-blue-600 hover:border-2"
                       type="submit"
                       onClick={uploadImage}
                       disabled={!file}

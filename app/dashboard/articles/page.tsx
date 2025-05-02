@@ -7,6 +7,7 @@ import {Session} from "next-auth";
 import { ColumnDef } from '@tanstack/react-table'
 import { useUser } from '@app/context/UserContext'
 
+
 interface BlogType{
     id: number
     content: string
@@ -25,43 +26,52 @@ export interface CustomSession extends Session {
     user:UserType
 }
 
+const formattedDate = (date: Date) => date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: true,
+});
+
+export const fetchPosts = async (user: any, session: any, setIsLoading: any, setArticles: any) => {
+    setIsLoading(true);
+    const resp = await fetch("/api/blog");
+    const data = await resp.json();
+    
+    const blog = user?.role == "admin" 
+        ? data 
+        : data.filter((article: any) => article.author?._id === session?.user?.id);
+    
+    localStorage.setItem("totalBlogs", JSON.stringify(blog.length));
+    
+    const blogStructure = blog.map((article: any) => ({
+        id: article._id,
+        content: article.content,
+        status: article.status,
+        title: article.title,
+        tag: article.tag,
+        image: article.image,
+        createdAt: formattedDate(new Date(article.date)),
+    }));
+    
+    setArticles(blogStructure);
+    setIsLoading(false);
+};
+
+
+
 const Articles = () => {
     const { data: session } = useSession() as {data:CustomSession | null};
     const [articles, setArticles] = useState<BlogType[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const {user} = useUser();
 
-    const formattedDate = (date: Date) => date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: true,
-    });
-
-    const fetchPosts = async () => {
-        setIsLoading(true);
-        const resp = await fetch("/api/blog");
-        const data = await resp.json();
-        //Get all the blogs if you have logged in as Admin from the user?.role
-        const blog = user?.role == "admin" ? data : data.filter((article: any) => article.author?._id === session?.user?.id);
-        localStorage.setItem("totalBlogs", JSON.stringify(blog.length));
-        const blogStructure = blog.map((article: any) => ({
-            id: article._id,
-            content: article.content,
-            status: article.status,
-            title: article.title,
-            tag: article.tag,
-            createdAt: formattedDate(new Date(article.date)),
-        }));
-        setArticles(blogStructure);
-        setIsLoading(false);
-    };
 
     useEffect(() => {
-        fetchPosts();
+        fetchPosts(user, session, setIsLoading, setArticles);
     }, [session]);
     return (
         <div className='mx-10 pt-5'>
