@@ -11,11 +11,26 @@ const handler = NextAuth({
   ],
   callbacks: {
     async session({ session }) {
-      const sessionUser = await User.findOne({
-        email: session.user.email,
-      });
-      session.user.id = sessionUser._id.toString();
-      return session;
+      try {
+        // Ensure the database connection is established
+        await connectToDB();
+
+        // Fetch the user from the database using the email
+        const sessionUser = await User.findOne({
+          email: session.user.email,
+        });
+
+        // Add the user's ID to the session object
+        if (sessionUser) {
+          session.user.id = sessionUser._id.toString();
+          session.user.role = sessionUser.role; // Include role if needed
+        }
+
+        return session;
+      } catch (error) {
+        console.error("Error in session callback:", error);
+        return session; // Return the session even if there's an error
+      }
     },
     async signIn({ profile }) {
       try {

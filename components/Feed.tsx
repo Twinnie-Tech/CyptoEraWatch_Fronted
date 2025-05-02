@@ -4,6 +4,7 @@ import CryptoCard from './CryptoCard';
 import Image from 'next/image';
 import moment from "moment";
 import { useSession } from "next-auth/react";
+import { CustomSession } from "@app/dashboard/articles/page";
 
 
 interface PostalModalProps {
@@ -20,8 +21,8 @@ interface CryptoCardValues {
 export const PostModal : React.FC<PostalModalProps> = ({post , onClose}) =>{
   const [commentAuthors,setCommentAuthors] = useState<{[key: string]: any}>({});
   const [newComment,setNewComment] = useState('');
-  const {data : session} = useSession();
-
+  const { data: session } = useSession() as { data: CustomSession | null };
+  
 const handleCommentSubmit = async(e: React.FormEvent)=>{
 e.preventDefault();
 try{
@@ -32,7 +33,7 @@ try{
         },
         body: JSON.stringify({
             content: newComment,
-            authorId: session?.user?.id, // Assuming you have session from next-auth
+            authorId: session?.user?.id , // Assuming you have session from next-auth
             createdAt: new Date().toISOString(), 
         })
     });
