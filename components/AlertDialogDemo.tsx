@@ -5,7 +5,7 @@ import { MdOutlineEdit } from 'react-icons/md';
 import { ArticleDetails } from '@app/Dummy/MOCK_DATA';
 import UpdateForm from './UpdateForm';
 import { useUser } from '@app/context/UserContext';
-import { fetchPosts } from '@app/dashboard/articles/page';
+import { fetchPosts } from '@app/dashboard/articles/fetchPosts';
 
 interface AlertDialogDemoProps {
     typeButton: string;
