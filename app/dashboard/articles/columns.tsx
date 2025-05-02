@@ -7,7 +7,7 @@ import AlertDialogDemo from "@components/AlertDialogDemo";
 import ViewBlogContent from "@components/ViewBlogContent";
 import DeleteDialogDemo from "@components/DeleteDialogDemo";
 
-export const columns: ColumnDef<ArticleDetails>[] = [
+export const columns: ColumnDef<any>[] = [
   {
     accessorKey: "title",
     header: ({ column }) => {

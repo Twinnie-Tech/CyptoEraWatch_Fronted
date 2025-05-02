@@ -5,6 +5,7 @@ import { MdOutlineEdit } from 'react-icons/md';
 import { ArticleDetails } from '@app/Dummy/MOCK_DATA';
 import UpdateForm from './UpdateForm';
 import { useUser } from '@app/context/UserContext';
+import { fetchPosts } from '@app/dashboard/articles/fetchPosts';
 
 interface AlertDialogDemoProps {
     typeButton: string;
@@ -41,12 +42,11 @@ const AlertDialogDemo = ({ typeButton, name, blog }: AlertDialogDemoProps) => {
                     </AlertDialog.Title>
                     <AlertDialog.Description className="text-mauve11 mt-4 mb-5 text-[15px] leading-normal">
                         <div className="grid w-full mb-4  items-center gap-1.5">
-                            <UpdateForm type='Update' blog={blog}  />
+                            <UpdateForm type='Update' blog={blog} fetchPosts={() => fetchPosts(user, null, () => {}, () => {})} />
                         </div>
                     </AlertDialog.Description>
                 </AlertDialog.Content>
             </AlertDialog.Portal>
         </AlertDialog.Root>
     );
-};
-export default AlertDialogDemo;
+};export default AlertDialogDemo;

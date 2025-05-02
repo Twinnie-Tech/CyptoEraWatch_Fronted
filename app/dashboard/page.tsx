@@ -27,7 +27,6 @@ const Dashboard = () => {
         setIsLoading(true);
         const resp = await fetch("/api/blog");
         const data = await resp.json();
-        console.log(data,"all data");
         
     const blog = user?.role == "admin" ? data : data.filter((article: any) => article.author?._id == session?.user?.id);
     setTotalArticles(blog?.length);
