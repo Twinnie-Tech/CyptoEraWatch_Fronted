@@ -3,11 +3,9 @@ import { connectToDB } from "@utils/database";
 
 export const POST = async (req) => {
   const { email } = await req.json();
-  console.log(email, "email value");
   try {
     await connectToDB();
     const user = await User.findOne({ email });
-    console.log(user, "user value");
     if (!user) {
       return new Response("User not found", { status: 404 });
     }

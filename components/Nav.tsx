@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 import logoImage from "../public/assets/images/logo.svg";
+import { data } from '@app/Dummy/MOCK_DATA';
 const Nav = () => {
     const { data: session } = useSession();
     const [providers, setProviders] = useState(null);
@@ -17,7 +18,7 @@ const Nav = () => {
         declareProviders();
     }, []);
     return (
-        <nav className='flex-between w-full mb-16 pt-3'>
+        <nav className='flex-between w-full mb-4 pt-3 sticky top-0 z-10 bg-white shadow-md p-2 sm:p-4'>
             <Link href="/" className='flex gap-2 flex-center'>
                 <Image src={logoImage} alt='Logo image' width={50} height={50} className='object-contain' />
                 <p className='logo_text'>CryptoEraWatch</p>
@@ -52,15 +53,11 @@ const Nav = () => {
                     ) : (
                         <>
                             {
-                                providers && Object.values(providers).map((provider: any) => (
-                                    <button type='button'
-                                        key={provider.name}
-                                        onClick={() => signIn(provider.id)}
-                                        className='black_btn'
-                                    >
-                                        Sign In
-                                    </button>
-                                ))
+                        <Link href="/SignIn" >
+                            <button type="button" className="black_btn">
+                            Sign In
+                            </button>
+                        </Link>  
                             }
                         </>
                     )

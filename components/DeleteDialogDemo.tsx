@@ -26,7 +26,6 @@ const DeleteDialogDemo = ({blogId}:DeleteDialogDemoProps) => {
         }else {
             throw new Error("Failed to delete blog!");
         }
-        console.log(`Deleting blog with id: ${blogId}`);
     };
   return (
 <AlertDialog.Root>

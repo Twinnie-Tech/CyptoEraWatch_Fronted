@@ -44,7 +44,6 @@ const UpdateForm = ({ blog, type, fetchPosts }: UpdateFormProps) => {
       formData.append("file", file);
       formData.append("upload_preset", cloudPreset);
 
-      console.log(formData, "formData");
       const response = await fetch(
         `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
         {
@@ -54,12 +53,30 @@ const UpdateForm = ({ blog, type, fetchPosts }: UpdateFormProps) => {
       );
 
       const data = await response.json();
-      console.log(data, "data response");
+      toast.success("Image uploaded successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
 
       setPost({ ...post, image: data.secure_url });
       setLoading(false);
     } catch (error) {
-      console.error("Error uploading image:", error);
+      toast.error("Error uploading image!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setLoading(false);
     }
   };
