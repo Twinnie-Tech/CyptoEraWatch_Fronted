@@ -1,5 +1,5 @@
 'use client';
-import React,{useState} from 'react'
+import React,{useState,useEffect,useRef} from 'react'
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -7,20 +7,31 @@ import { CustomSession } from '@app/dashboard/articles/page';
 import { PostModal } from './Feed';
 import {toast} from "react-toastify";
 
-
+let hasNotifiedLogout = false;
 const CryptoCard = ({ blog, handleTagClick }: any) => {
     const [showModal,setShowModal] = useState(false);
     const { data: session } = useSession() as { data: CustomSession | null };
     const router = useRouter();
+
+    useEffect(()=> {
+        if(session?.user?.id == undefined && !hasNotifiedLogout) {
+
+        setTimeout(()=> {
+            toast.error("You must be logged in to comment.");
+        },0);
+       hasNotifiedLogout = true;
+      }
+
+      if(session?.user?.id) {
+        hasNotifiedLogout = false;
+      }
+    },[session]);
+    
     const handleProfileClick = () => {
         if (blog.author?._id === session?.user?.id) return router.push("/dashboard");
 
         router.push(`/profile/${blog.author?._id}?name=${blog.author?.userName}`);
     };
-
-      if(session?.user?.id == undefined){
-       toast.error("You must be logged in to comment.");
-      }
 
     return (
         <>

@@ -4,12 +4,10 @@ import mongoose from "mongoose";
 
 const updateExistingDocs = async () => {
     try {
-        console.log("testing connections");
         // const result = await Blog.updateMany(
         //     { isDeleted: { $exists: false } },
         //     { $set: { isDeleted: false } }
         // );
-        // console.log(`Updated ${result.modifiedCount} documents`);
 
         await Blog.updateMany(
             { isDeleted: false },

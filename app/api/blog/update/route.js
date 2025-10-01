@@ -5,8 +5,6 @@ export const PATCH = async (request) => {
   try {
     await connectToDB();
     const existingBlog = await Blog.findById(id);
-    console.log(existingBlog);
-    console.log(status);
     if (!existingBlog) {
       return new Response("Blog not found", { status: 404 });
     }
